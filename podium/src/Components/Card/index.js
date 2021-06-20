@@ -1,21 +1,27 @@
 import './style.css';
 
 
-function Card({characters}){
-    return(
+function Card({ characters, handleAddVote }){
+   
+    return (
         <>
-            {characters.map(item =>(
+            { characters.map(item =>(
                <div className="card" key={item.id}>
                <h3>{item.name}</h3>
                <img src={item.img} alt="" className= "img-character"/>
                <div className="buttons-card">
-                   <button className="button-gold">+</button>
-                   <button className="button-black">-</button>
+                   <button 
+                   className="button-gold"
+                    onClick={() => handleAddVote(1, item.id)}
+                    >+</button>
+                   <button 
+                   className="button-black"
+                   onClick={() => handleAddVote(-1, item.id)}
+                   >-</button>
                </div>
-           </div>  
-            ))
+            </div>  
+            ))}
            
-        }
         </>
     );
 }

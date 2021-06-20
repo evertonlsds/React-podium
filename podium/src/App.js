@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Card from './Components/Card';
+import Ranking from './Components/Ranking';
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -33,14 +34,39 @@ function App() {
       })
       
     }
-    setCharacters(formattedCharacters)
+    setCharacters(formattedCharacters);
   }
+
+    function handleAddVote(value, characterId){
+      const localCharacter = [...characters];
+
+      const indexCharacter = localCharacter.findIndex(item=> item.id === characterId);
+
+      if (indexCharacter === -1){
+        return;
+      }
+      const newCountVotes = localCharacter[indexCharacter].votes + value;
+
+      if( newCountVotes >= 0){
+        localCharacter[indexCharacter].votes = newCountVotes;
+      }
+
+       setCharacters([...localCharacter]);
+
+    }
+
+
   return (
     <div className='app'>
       <Navbar/>
-      <div className = "characters-list">
-      <Card characters={characters}/>
+      <div className="conteiner">
+        <div className = "characters-list">
+        <Card characters={characters} handleAddVote={handleAddVote} />
       </div>
+      <Ranking characters={characters}/>
+    </div>
+     
+      
       
 
     </div>

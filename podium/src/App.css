@@ -10,6 +10,13 @@ body {
 
 }
 
+
+.conteiner{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
 .characters-list{
   display: flex;
   flex-wrap: wrap;
